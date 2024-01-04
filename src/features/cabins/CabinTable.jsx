@@ -37,7 +37,16 @@ function CabinTable() {
   if(isLoading) return <Spinner />
 
 
-  return <div>CabinTable</div>;
+  return <Table role='table'>
+    <TableHeader role='row'>
+      <div></div>
+      <div>Cabin</div>
+      <div>Capacity</div>
+      <div>Price</div>
+      <div>Discount</div>
+      <div></div>
+    </TableHeader>
+  </Table>;
 }
 
 export default CabinTable;
