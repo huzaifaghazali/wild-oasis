@@ -13,7 +13,6 @@ function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
 
-
   // React query for storing data on supabase
   const queryClient = useQueryClient();
   const { mutate, isLoading: isCreating } = useMutation({
@@ -80,13 +79,16 @@ function CreateCabinForm() {
           {...register('discount', {
             required: 'This field is required',
             validate: (value) =>
-              value <= getValues().regularPrice ||
+              Number(getValues().regularPrice) > Number(value) ||
               'Discount should be less than regular price',
           })}
         />
       </FormRow>
 
-      <FormRow label='Description for website' error={errors?.description?.message}>
+      <FormRow
+        label='Description for website'
+        error={errors?.description?.message}
+      >
         <Textarea
           type='number'
           id='description'
