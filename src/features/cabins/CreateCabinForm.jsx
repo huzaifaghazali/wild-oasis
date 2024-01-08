@@ -1,13 +1,11 @@
-import styled from 'styled-components';
-
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createCabin } from '../../services/apiCabings';
 import Input from '../../ui/Input';
 import Form from '../../ui/Form';
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
-import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createCabin } from '../../services/apiCabings';
 import toast from 'react-hot-toast';
 import FormRow from '../../ui/FormRow';
 
@@ -35,7 +33,7 @@ function CreateCabinForm() {
   }
 
   function onError(errors) {
-    console.log(errors);
+    // console.log(errors);
   }
 
   return (
@@ -44,6 +42,7 @@ function CreateCabinForm() {
         <Input
           type='text'
           id='name'
+          disabled={isCreating}
           {...register('name', { required: 'This field is required' })}
         />
       </FormRow>
@@ -52,6 +51,7 @@ function CreateCabinForm() {
         <Input
           type='number'
           id='maxCapacity'
+          disabled={isCreating}
           {...register('maxCapacity', {
             required: 'This field is required',
             min: { value: 1, message: 'Capacity should be at least 1' },
@@ -63,6 +63,7 @@ function CreateCabinForm() {
         <Input
           type='number'
           id='regularPrice'
+          disabled={isCreating}
           {...register('regularPrice', {
             required: 'This field is required',
             min: { value: 1, message: 'Capacity should be at least 1' },
@@ -75,6 +76,7 @@ function CreateCabinForm() {
           type='number'
           id='discount'
           defaultValue={0}
+          disabled={isCreating}
           {...register('discount', {
             required: 'This field is required',
             validate: (value) =>
@@ -88,13 +90,14 @@ function CreateCabinForm() {
         <Textarea
           type='number'
           id='description'
+          disabled={isCreating}
           defaultValue=''
           {...register('description', { required: 'This field is required' })}
         />
       </FormRow>
 
       <FormRow label='Cabin photo'>
-        <FileInput id='image' accept='image/*' />
+        <FileInput disabled={isCreating} id='image' accept='image/*' />
       </FormRow>
 
       <FormRow>
