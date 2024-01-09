@@ -1,16 +1,22 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+
 import { createCabin } from '../../services/apiCabings';
 import Input from '../../ui/Input';
 import Form from '../../ui/Form';
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
-import toast from 'react-hot-toast';
 import FormRow from '../../ui/FormRow';
 
-function CreateCabinForm() {
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
+function CreateCabinForm({ cabinToEdit = {} }) {
+  const { id: editId, ...editValues } = cabinToEdit;
+  const isEditSession = Boolean(editId);
+
+  const { register, handleSubmit, reset, getValues, formState } = useForm({
+    defaultValues: isEditSession ? editValues : {},
+  });
   const { errors } = formState;
 
   // React query for storing data on supabase
@@ -28,7 +34,7 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    mutate({...data, image: data.image[0]});
+    mutate({ ...data, image: data.image[0] });
   }
 
   function onError(errors) {
@@ -103,7 +109,7 @@ function CreateCabinForm() {
           disabled={isCreating}
           id='image'
           accept='image/*'
-          {...register('image', { required: 'This field is required' })}
+          {...register('image', { required: isEditSession ? false : 'This field is required' })}
         />
       </FormRow>
 
@@ -112,7 +118,9 @@ function CreateCabinForm() {
         <Button variation='secondary' type='reset'>
           Cancel
         </Button>
-        <Button disabled={isCreating}>Add cabin</Button>
+        <Button disabled={isCreating}>
+          {isEditSession ? 'Edit Cabin' : ' Create new cabin'}
+        </Button>
       </FormRow>
     </Form>
   );
