@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { HiEllipsisVertical } from 'react-icons/hi2';
 import styled from 'styled-components';
 
@@ -69,21 +70,51 @@ const MenusContext = createContext();
 // 2.  Create parent component
 function Menus({ children }) {
   const [openId, setOpenId] = useState('');
+  const [position, setPosition] = useState(null);
 
   const close = () => setOpenId('');
   const open = setOpenId;
 
   return (
-    <MenusContext.Provider value={{ openId, close, open }}>
+    <MenusContext.Provider
+      value={{ openId, close, open, position, setPosition }}
+    >
       {children}
     </MenusContext.Provider>
   );
 }
 
 // 3. Create child components to help implementing the common task
-function Toggle({ id }) {}
+function Toggle({ id }) {
+  const { openId, close, open, setPosition } = useContext(MenusContext);
 
-function List({ id }) {}
+  function handleClick(e) {
+    const rect = e.target.closest('button').getBoundingClientRect();
+    setPosition({
+      x: window.innerWidth - rect.width - rect.x,
+      y: rect.y + rect.height + 8,
+    });
+
+    openId === '' || openId !== id ? open(id) : close();
+  }
+
+  return (
+    <StyledToggle onClick={handleClick}>
+      <HiEllipsisVertical />
+    </StyledToggle>
+  );
+}
+
+function List({ id, children }) {
+  const { openId, position } = useContext(MenusContext);
+
+  if (openId !== id) return null;
+
+  return createPortal(
+    <StyledList position={position}>{children}</StyledList>,
+    document.body
+  );
+}
 
 function Button({ children }) {
   return (
