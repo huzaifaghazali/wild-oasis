@@ -7,6 +7,7 @@ import { useCreateCabin } from './useCreateCabin';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import Table from '../../ui/Table';
+import Menus from '../../ui/Menus';
 
 // const TableRow = styled.div`
 //   display: grid;
@@ -100,20 +101,29 @@ function CabinRow({ cabin }) {
             </Modal.Window>
 
             <Modal.Open opens='delete'>
-            <button>
-              <HiTrash />
-            </button>
+              <button>
+                <HiTrash />
+              </button>
             </Modal.Open>
 
             <Modal.Window name='delete'>
-              <ConfirmDelete 
+              <ConfirmDelete
                 resourceName='cabins'
                 disabled={isDeleting}
                 onConfirm={() => deleteCabin(cabinID)}
               />
             </Modal.Window>
-        
           </Modal>
+
+          <Menus.Menu>
+            <Menus.Toggle id={cabinID} />
+
+            <Menus.List id={cabinID}>
+              <Menus.Button>Duplicate</Menus.Button>
+              <Menus.Button>Edit</Menus.Button>
+              <Menus.Button>Delete</Menus.Button>
+            </Menus.List>
+          </Menus.Menu>
         </div>
       </Table.Row>
     </>
