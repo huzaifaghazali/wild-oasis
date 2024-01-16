@@ -9,19 +9,17 @@ import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
 
-
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
   const isWorking = isCreating || isEditing;
-  
+
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
-
 
   const { errors } = formState;
 
@@ -32,9 +30,23 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     if (isEditSession)
       editCabin(
         { newCabinData: { ...data, image }, id: editId },
-        { onSuccess: () => reset() }
+        {
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.(); // Optional chaining run the function if it is present Close the modal
+          },
+        }
       );
-    else createCabin({ ...data, image: image }, { onSuccess: () => reset() });
+    else
+      createCabin(
+        { ...data, image: image },
+        {
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.(); // Close the modal
+          },
+        }
+      );
   }
 
   function onError(errors) {
@@ -117,7 +129,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation='secondary' type='reset'>
+        <Button
+          onClick={() => onCloseModal?.()}
+          variation='secondary'
+          type='reset'
+        >
           Cancel
         </Button>
         <Button disabled={isWorking}>

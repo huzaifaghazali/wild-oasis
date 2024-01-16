@@ -7,13 +7,17 @@ import Modal from '../../ui/Modal';
 function AddCabin() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   return (
-    <div>
+    <>
       <Button onClick={() => setIsOpenModal((show) => !show)}>
         Add a new Cabin
       </Button>
 
-      {isOpenModal && <Modal />}
-    </div>
+      {isOpenModal && (
+        <Modal onClose={() => setIsOpenModal(false)}>
+          <CreateCabinForm onCloseModal={() => setIsOpenModal(false)} />
+        </Modal>
+      )}
+    </>
   );
 }
 
