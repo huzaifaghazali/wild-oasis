@@ -1,7 +1,9 @@
 import React from 'react'
+import { useUser } from '../features/authentication/useUser';
 
 function ProtectedRoute({ children }) {
    // 1. Load the authenticated user
+   const { isLoading, user } = useUser();
 
    // 2. While loading, show a spinner
 
