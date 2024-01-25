@@ -3,15 +3,22 @@ import Button from '../../ui/Button';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
+import { useSignup } from './useSignup';
 
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
-  const { register, formState, getValues, handleSubmit } = useForm();
+  const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
+  const { signUp, isLoading } = useSignup();
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit({ fullName, email, password }) {
+    signUp(
+      { fullName, email, password },
+      {
+        onSettled: reset,
+      }
+    );
   }
 
   return (
@@ -38,7 +45,10 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow label='Password (min 8 characters)' error={errors?.password?.message}>
+      <FormRow
+        label='Password (min 8 characters)'
+        error={errors?.password?.message}
+      >
         <Input
           type='password'
           id='password'
