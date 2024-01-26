@@ -45,7 +45,7 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
-export async function updateUser({ password, fullName, avatar }) {
+export async function updateCurrentUser({ password, fullName, avatar }) {
   // 1. Update password OR fullName
   let updateData;
   if (password) updateData = { password };
