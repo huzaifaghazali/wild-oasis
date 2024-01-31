@@ -51,7 +51,59 @@ The Wild Oasis is a sophisticated full-stack web application developed with Vite
 
 
 ## Pictures
+1
+   
+   ![wildOasis_1](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/e41c883b-a405-4b2e-87ff-1140bb60fa9b)
 
+2
+   
+   ![wildOasis_1a](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/cb7b3393-5b56-411b-9c7d-904e47698c71)
+
+3
+   
+   ![wildOasis_2](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/1006265b-93e6-49d7-a68c-872559e98c9e)
+
+4
+   
+   ![wildOasis_2a](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/50dc9a44-6223-4e1f-beda-c9ac0680defa)
+
+5
+
+   ![wildOasis_3](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/c09aa90c-2eae-4a07-af9d-93c2eca79ecb)
+
+6
+   
+   ![wildOasis_4](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/c0f1fb02-a6a6-42b0-823a-8002665ccb58)
+
+7
+   
+   ![wildOasis_5](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/3f996cf6-1981-44fc-ba63-8c4ec60bf27c)
+
+8
+   
+   ![wildOasis_6](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/e6b4524b-5c3d-4e49-a42f-e67edb057c16)
+
+9
+   
+   ![wildOasis_7](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/f6df4203-4c38-40e0-8f19-714799fd4d05)
+
+10   
+   
+   ![wildOasis_8](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/350f6890-b823-4d23-9936-5e3c9d8b707c)
+
+11
+   
+   ![wildOasis_9](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/a8b71aaf-f2cc-4699-905f-ad3b3d504f08)
+
+12
+   
+   ![wildOasis_10](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/73ea311a-a4ac-43e5-9088-95ae26a8a3af)
+
+13
+   
+   ![wildOasis_11](https://github.com/huzaifaghazali/wild-oasis/assets/63412385/7d5e098d-c2a6-4679-aeb0-09a4023ee5ef)
+
+   
 ## Technologies Used
 
 - React
